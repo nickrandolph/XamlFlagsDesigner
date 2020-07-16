@@ -1,0 +1,323 @@
+﻿    <Page.Resources>
+        <DataTemplate x:Key="OptionsItemTemplate">
+            <Grid>
+                <!--<VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="MyDisabledStates">
+                    <VisualState x:Name="MyCustomEnabled">
+                        <VisualState.StateTriggers>
+                            <local:BooleanDataTrigger local:BooleanDataTrigger.TriggerValue="True"
+                                                      local:BooleanDataTrigger.DataValue="{Binding IsEnabled}" />
+                        </VisualState.StateTriggers>
+                    </VisualState>
+                    <VisualState x:Name="MyCustomDisabled">
+                        <VisualState.StateTriggers>
+                            <local:BooleanDataTrigger local:BooleanDataTrigger.TriggerValue="False"
+                                                      local:BooleanDataTrigger.DataValue="{Binding IsEnabled}" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                                <Setter Target="ValueText.(TextBlock.Foreground)"
+                                        Value="LightGray" />
+                        </VisualState.Setters>
+
+                    </VisualState>
+                </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>-->
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="✓"
+                           Foreground="White"
+                           FontSize="12"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="1" />-->
+                <TextBlock Text="{Binding Value}"
+                           Grid.Column="2"
+                           x:Name="ValueText"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="OptionsListViewContainerStyle"
+               TargetType="ListViewItem">
+            <Setter Property="Foreground"
+                    Value="Black" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Grid x:Name="ContentBorder" 
+                              Background="White"
+                              DataContext="{TemplateBinding Content}"
+                              CornerRadius="{TemplateBinding CornerRadius}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentBorder.(Grid.Background)"
+                                                    Value="DarkBlue" />
+                                            <Setter Target="CheckMark.(UIElement.Visibility)"
+                                                    Value="Visible" />
+                                            <!--<Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="White" />-->
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentBorder.(Grid.Background)"
+                                                    Value="DarkBlue" />
+                                            <Setter Target="CheckMark.(UIElement.Visibility)"
+                                                    Value="Visible" />
+                                            <!--<Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="White" />-->
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOverSelected">
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentBorder.(Grid.Background)"
+                                                    Value="DarkBlue" />
+                                            <Setter Target="CheckMark.(UIElement.Visibility)"
+                                                    Value="Visible" />
+                                            <!--<Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="White" />-->
+                                        </VisualState.Setters>
+
+                                    </VisualState>
+                                    <VisualState x:Name="PressedSelected">
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentBorder.(Grid.Background)"
+                                                    Value="DarkBlue" />
+                                            <Setter Target="CheckMark.(UIElement.Visibility)"
+                                                    Value="Visible" />
+                                            <!--<Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="White" />-->
+                                        </VisualState.Setters>
+
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="DisabledStates">
+                                    <VisualState x:Name="CustomSelected">
+                                        <VisualState.StateTriggers>
+                                            <local:BooleanDataTrigger local:BooleanDataTrigger.TriggerValue="True"
+                                                                      local:BooleanDataTrigger.DataValue="{Binding IsSelectedAndEnabled}" />
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="CustomEnabled">
+                                        <VisualState.StateTriggers>
+
+                                            <local:BooleanDataTrigger local:BooleanDataTrigger.TriggerValue="True"
+                                                                      local:BooleanDataTrigger.DataValue="{Binding IsEnabled}" />
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="Black" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="CustomDisabled">
+                                        <VisualState.StateTriggers>
+                                            <local:BooleanDataTrigger local:BooleanDataTrigger.TriggerValue="False"
+                                                                      local:BooleanDataTrigger.DataValue="{Binding IsEnabled}" />
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="DisabledBackground.(UIElement.Visibility)"
+                                                    Value="Visible" />
+                                            <Setter Target="ContentBorder.(UIElement.IsHitTestVisible)"
+                                                    Value="false" />
+                                            <Setter Target="ContentPresenter.(UIElement.Foreground)"
+                                                    Value="LightGray" />  
+                                        </VisualState.Setters>
+
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border Grid.ColumnSpan="2" Visibility="Collapsed" Background="DarkGray" x:Name="DisabledBackground"/>
+                            <TextBlock Text="✓"
+                                       Foreground="White"
+                                       FontSize="12"
+                                       x:Name="CheckMark"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Visibility="Collapsed" />
+
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Grid.Column="1"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              HorizontalAlignment="Left"
+                                              Margin="12,0,0,0"
+                                              VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <d:Grid.Resources>
+            <local:MainPageViewModel x:Key="MainPageViewModel" />
+        </d:Grid.Resources>
+        <ListView d:DataContext="{StaticResource MainPageViewModel}"
+                  ItemTemplate="{StaticResource OptionsItemTemplate}"
+                  ItemsSource="{Binding Options}"
+                  ItemContainerStyle="{StaticResource OptionsListViewContainerStyle}"
+                  SelectionChanged="OptionsSelectionChanged">
+
+        </ListView>
+    </Grid>
+
+
+
+
+
+    
+    public class MainPageViewModel : BindableBase
+    {
+        public List<OptionViewModel> Options { get; }
+
+        public MainPageViewModel()
+        {
+            Options = new List<OptionViewModel>
+                        {
+                            new OptionViewModel { Value = "Option 1-A", Category = "1", Variety = "A"},
+                            new OptionViewModel { Value = "Option 1-B", Category = "1", Variety = "B" },
+                            new OptionViewModel { Value = "Option 2-A", Category = "2", Variety = "A" },
+                            new OptionViewModel { Value = "Option 2-B", Category = "2", Variety = "B" },
+                            new OptionViewModel { Value = "Option 3-A", Category = "3", Variety = "A"},
+                            new OptionViewModel { Value = "Option 3-B", Category = "3", Variety = "B"},
+            };
+
+            OnSelectType(Options.First());
+
+        }
+
+        public void OnSelectType(OptionViewModel option)
+        {
+
+            // reset all options
+            Options.ForEach(o => { o.IsEnabled = false; o.IsSelected = false; });
+
+            if (option is null) return;
+
+            // enable options of the same variety (ie. A,B)
+           var x =  Options.Where(o => o.Variety == option.Variety)
+                .Select(o =>  o.IsEnabled = true).ToArray();
+            Console.WriteLine(x);
+            // enable options of the same category (ie. 1,2,3)
+            x = Options.Where(o => o.Category == option.Category)
+                .Select(o => o.IsEnabled = true).ToArray();
+            Console.WriteLine(x);
+
+            // select the current option
+            option.IsSelected = true;
+        }
+    }
+
+    public class OptionViewModel : BindableBase
+    {
+        public string Value { get; set; }
+        public string Variety { get; set; }
+        public string Category { get; set; }
+
+        private bool _isEnabled;
+        public bool IsEnabled { get => _isEnabled; set => SetProperty(ref _isEnabled, value, onChanged: ()=> OnPropertyChanged(nameof(IsSelectedAndEnabled))); }
+
+        private bool _isSelected;
+        public bool IsSelected { get => _isSelected; set => SetProperty(ref _isSelected, value, onChanged: () => OnPropertyChanged(nameof(IsSelectedAndEnabled))); }
+
+        public bool IsSelectedAndEnabled => IsSelected && IsEnabled;
+
+    }
+
+    public abstract class BindableBase : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = null, Action onChanged = null, Action<T> onChanging = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
+                return false;
+
+            onChanging?.Invoke(value);
+
+            backingStore = value;
+
+            onChanged?.Invoke();
+            OnPropertyChanged(propertyName);
+
+            return true;
+        }
+    }
+
+    public class BooleanDataTrigger : StateTriggerBase, IAdaptiveTrigger
+    {
+        #region DataValue
+        public static Boolean GetDataValue(DependencyObject obj)
+        {
+            return (Boolean)obj.GetValue(DataValueProperty);
+        }
+        public static void SetDataValue(DependencyObject obj, Boolean value)
+        {
+            obj.SetValue(DataValueProperty, value);
+        }
+        public static readonly DependencyProperty DataValueProperty =
+            DependencyProperty.RegisterAttached("DataValue", typeof(Boolean),
+                typeof(BooleanDataTrigger), new PropertyMetadata(false, DataValueChanged));
+        private static void DataValueChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
+        {
+            Boolean triggerValue = (Boolean)target.GetValue(BooleanDataTrigger.TriggerValueProperty);
+            TriggerStateCheck(target, (Boolean)e.NewValue, triggerValue);
+        }
+        #endregion
+        #region TriggerValue
+        public static Boolean GetTriggerValue(DependencyObject obj)
+        {
+            return (Boolean)obj.GetValue(TriggerValueProperty);
+        }
+        public static void SetTriggerValue(DependencyObject obj, Boolean value)
+        {
+            obj.SetValue(TriggerValueProperty, value);
+        }
+        // Using a DependencyProperty as the backing store for TriggerValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TriggerValueProperty =
+            DependencyProperty.RegisterAttached("TriggerValue", typeof(Boolean),
+                typeof(BooleanDataTrigger), new PropertyMetadata(false, TriggerValueChanged));
+
+        public event EventHandler IsActiveChanged;
+
+        public bool IsActive { get; set; }
+
+        private static void TriggerValueChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
+        {
+            Boolean dataValue = (Boolean)target.GetValue(BooleanDataTrigger.DataValueProperty);
+            TriggerStateCheck(target, dataValue, (Boolean)e.NewValue);
+        }
+        #endregion
+
+        private static void TriggerStateCheck(DependencyObject target, Boolean dataValue, Boolean triggerValue)
+        {
+            BooleanDataTrigger trigger = target as BooleanDataTrigger;
+            if (trigger == null) return;
+            trigger.SetActive(triggerValue == dataValue);
+            trigger.IsActive = triggerValue == dataValue;
+            trigger.IsActiveChanged?.Invoke(trigger, EventArgs.Empty);
+        }
+
+    }
